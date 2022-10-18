@@ -227,7 +227,7 @@ TEST(Positive, Division) {
   Fixp<int16_t, 2> A(0b111);
   Fixp<int16_t, 2> B(0b10);
   Fixp<int16_t, 4> C(20);
-  Fixp<int16_t, 1> D(0b11);
+  Fixp<int16_t, 0> D(0b11);
   Fixp<int16_t, 2> E(5);
   Fixp<int16_t, 2> F(0b100);
   auto AdB = A / B;

@@ -102,7 +102,7 @@ public:
    * @return Fixp<T, FracBits * FracBitsIn>
    */
   template <class TIn, TIn FracBitsIn>
-  Fixp<T, FracBits * FracBitsIn> operator*(Fixp<TIn, FracBitsIn> In) {
+  Fixp<T, FracBits + FracBitsIn> operator*(Fixp<TIn, FracBitsIn> In) {
     assert(sizeof(T) == sizeof(TIn));
     // The wanted behaviour is that the result keeps its accuracy.
     // This means that the resulting Fixed Point type after the
@@ -110,7 +110,7 @@ public:
     //=====================================
     //===== Your Code goes here ===========
     //=====================================
-    return Fixp<T, FracBits * FracBitsIn>(0); // This is obviously wrong
+    return Fixp<T, FracBits + FracBitsIn>(0); // This is obviously wrong
   }
 
   /**
@@ -123,10 +123,10 @@ public:
    * @return Fixp<T, (T)((FracBits / FracBitsIn))>
    */
   template <class TIn, TIn FracBitsIn>
-  Fixp<T, (T)((FracBits / FracBitsIn))> operator/(Fixp<TIn, FracBitsIn> In) {
+  Fixp<T, (T)((FracBits - FracBitsIn))> operator/(Fixp<TIn, FracBitsIn> In) {
     assert(sizeof(T) == sizeof(TIn));
     // No need to implement Division
-    return Fixp<T, (T)((FracBits / FracBitsIn))>((T)Value / In.Value);
+    return Fixp<T, (T)((FracBits - FracBitsIn))>((T)Value / In.Value);
   }
 
   /**

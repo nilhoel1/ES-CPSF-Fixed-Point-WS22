@@ -2,5 +2,6 @@
   "cSpell.words": [
     "fixp",
     "ufixp"
-  ]
+  ],
+  "svn.ignoreMissingSvnWarning": true
 }
