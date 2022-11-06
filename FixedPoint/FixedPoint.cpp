@@ -14,13 +14,20 @@
  * @tparam FracBits Number of bits used to represent the part smaller 0.
  */
 template <std::integral T, T FracBits> class Fixp {
-public:
   T Value = 0;
 
+public:
   Fixp(T In) {
     assert(sizeof(T) * 8 > FracBits); // TODO
     Value = In;
   }
+
+  /**
+   * @brief Get the int value
+   *
+   * @return T
+   */
+  inline T getValue() const { return Value; }
 
   /**
    * @brief Get the Portion of the fixed point before the ".", bianry encoded.
@@ -30,7 +37,7 @@ public:
    * @return T
    */
   inline T getIntVal() {
-    return (Value >= 0) ? (Value >> FracBits) : (-Value) >> FracBits;
+    return (Value >= 0) ? (Value >> FracBits) : (-Value >> FracBits);
   }
 
   /**
@@ -120,7 +127,7 @@ public:
   Fixp<T, (T)((FracBits - FracBitsIn))> operator/(Fixp<TIn, FracBitsIn> In) {
     assert(sizeof(T) == sizeof(TIn));
     // No need to implement Division
-    return Fixp<T, (T)((FracBits - FracBitsIn))>((T)Value / In.Value);
+    return Fixp<T, (T)((FracBits - FracBitsIn))>((T)Value / In.getValue());
   }
 
   /**
@@ -133,7 +140,7 @@ public:
    */
   bool const operator==(Fixp In) {
     assert(checkTypes(*this, In));
-    return this->Value == In.Value;
+    return Value == In.getValue();
   }
 
   /**
@@ -146,7 +153,7 @@ public:
    */
   bool const operator!=(Fixp In) {
     assert(checkTypes(*this, In));
-    return this->Value != In.Value;
+    return this->Value != In.getValue();
   }
 
   /**
@@ -159,18 +166,18 @@ public:
    */
   friend std::ostream &operator<<(std::ostream &Os, const Fixp In) {
     long Pow10 = log10(pow(2, (sizeof(T) * 8))) + 1;
-    long IntValue =
-        (In.Value >= 0) ? In.Value >> FracBits : (In.Value >> FracBits) + 1;
-    long TempValue = In.Value;
+    long IntValue = (In.getValue() >= 0) ? In.getValue() >> FracBits
+                                          : (In.getValue() >> FracBits) + 1;
+    long TempValue = In.getValue();
     unsigned long FracDec =
-        (In.Value >= 0) ? 0 : (pow(2, -((FracBits))) * pow(10, Pow10));
+        (In.getValue() >= 0) ? 0 : (pow(2, -((FracBits))) * pow(10, Pow10));
     for (int I = 1; I <= FracBits; I++) {
-      bool FracBit = (In.Value >= 0) ? TempValue % 2 : !(TempValue % 2);
+      bool FracBit = (In.getValue() >= 0) ? TempValue % 2 : !(TempValue % 2);
       TempValue = TempValue >> 1;
       if (FracBit)
         FracDec += (pow(2, -((FracBits + 1) - I)) * pow(10, Pow10));
     }
-    if (In.Value < 0 && IntValue >= 0)
+    if (In.getValue() < 0 && IntValue >= 0)
       Os << "-";
     if (FracDec == pow(10, Pow10)) {
       Os << +IntValue + 1 << "."
