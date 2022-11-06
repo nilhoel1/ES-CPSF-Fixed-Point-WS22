@@ -173,9 +173,9 @@ public:
     if (In.getValue() < 0 && IntValue >= 0)
       Os << '-';
     if (FracDec == pow(10, Pow10)) {
-      Os << +IntValue + 1 << ".0";
+      Os << IntValue + 1 << ".0";
     } else {
-      Os << +IntValue << "." << +FracDec;
+      Os << IntValue << "." << FracDec;
     }
 
     return Os;
