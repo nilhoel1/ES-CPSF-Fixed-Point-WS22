@@ -1,4 +1,3 @@
-#include <cassert>
 #include <concepts>
 #include <ostream>
 #include <tgmath.h>
@@ -13,12 +12,13 @@
  * @tparam T Used Type for representation. Must be of: int[8,16,32,64]_t type.
  * @tparam FracBits Number of bits used to represent the part smaller 0.
  */
-template <std::integral T, T FracBits> class Fixp {
+template <std::integral T, T FracBits>
+requires (sizeof(T) * 8 > FracBits)
+class Fixp {
   T Value = 0;
 
 public:
   Fixp(T In) {
-    assert(sizeof(T) * 8 > FracBits); // TODO
     Value = In;
   }
 
