@@ -1,7 +1,6 @@
 #include <cassert>
-#include <cstdint>
-#include <iostream>
-#include <istream>
+#include <concepts>
+#include <ostream>
 #include <tgmath.h>
 
 #include "../include/TypeChecker.h"
@@ -14,18 +13,12 @@
  * @tparam T Used Type for representation. Must be of: int[8,16,32,64]_t type.
  * @tparam FracBits Number of bits used to represent the part smaller 0.
  */
-template <class T, T FracBits> class Fixp {
+template <std::integral T, T FracBits> class Fixp {
 public:
   T Value = 0;
 
   Fixp(T In) {
-    int8_t TypeSanityCheck = false;
-    TypeSanityCheck += std::is_same<T, int8_t>::value;
-    TypeSanityCheck += std::is_same<T, int16_t>::value;
-    TypeSanityCheck += std::is_same<T, int32_t>::value;
-    TypeSanityCheck += std::is_same<T, int64_t>::value;
-    assert(TypeSanityCheck == 1);
-    assert(sizeof(T) * 8 > FracBits);
+    assert(sizeof(T) * 8 > FracBits); // TODO
     Value = In;
   }
 
