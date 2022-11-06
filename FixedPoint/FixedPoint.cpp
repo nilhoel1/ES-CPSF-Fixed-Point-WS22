@@ -157,26 +157,29 @@ public:
    * @return std::ostream&
    */
   friend std::ostream &operator<<(std::ostream &Os, const Fixp In) {
-    long Pow10 = log10(pow(2, (sizeof(T) * 8))) + 1;
-    long IntValue = (In.getValue() >= 0) ? In.getValue() >> FracBits
-                                          : (In.getValue() >> FracBits) + 1;
+    constexpr int Pow10 = log10(pow(2, (sizeof(T) * 8))) + 1;
+
+    long IntValue = (In.getValue() >> FracBits) + (In.getValue() < 0);
     long TempValue = In.getValue();
+
     unsigned long FracDec =
-        (In.getValue() >= 0) ? 0 : (pow(2, -((FracBits))) * pow(10, Pow10));
-    for (int I = 1; I <= FracBits; I++) {
-      bool FracBit = (In.getValue() >= 0) ? TempValue % 2 : !(TempValue % 2);
-      TempValue = TempValue >> 1;
-      if (FracBit)
-        FracDec += (pow(2, -((FracBits + 1) - I)) * pow(10, Pow10));
+        (In.getValue() >= 0) ? 0 : (pow(2, -FracBits) * pow(10, Pow10));
+
+    for (int I = 0; I < FracBits; I++) {
+      if ((In.getValue() >= 0) == (TempValue % 2)) {
+        FracDec += pow(2, I - FracBits) * pow(10, Pow10);
+      }
+      TempValue >>= 1;
     }
+
     if (In.getValue() < 0 && IntValue >= 0)
-      Os << "-";
+      Os << '-';
     if (FracDec == pow(10, Pow10)) {
-      Os << +IntValue + 1 << "."
-         << "0";
+      Os << +IntValue + 1 << ".0";
     } else {
       Os << +IntValue << "." << +FracDec;
     }
+
     return Os;
   }
 };
