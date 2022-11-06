@@ -65,7 +65,8 @@ public:
    * @param In
    * @return Fixp
    */
-  template <T FracBitsIn> Fixp operator+(Fixp<T, FracBitsIn> In) {
+  template <T FracBitsIn>
+  Fixp<T, std::max(FracBits, FracBitsIn)> operator+(Fixp<T, FracBitsIn> In) {
     //=====================================
     //===== Your Code goes here ===========
     //=====================================
@@ -82,7 +83,8 @@ public:
    * @param In
    * @return Fixp
    */
-  template <T FracBitsIn> Fixp operator-(Fixp<T, FracBitsIn> In) {
+  template <T FracBitsIn>
+  Fixp<T, std::max(FracBits, FracBitsIn)> operator-(Fixp<T, FracBitsIn> In) {
     //=====================================
     //===== Your Code goes here ===========
     //=====================================
