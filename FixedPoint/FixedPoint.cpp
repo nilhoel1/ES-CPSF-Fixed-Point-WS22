@@ -60,7 +60,6 @@ public:
    *        In case two fixed points with different accuracy are added,
    *        The resulting fixed point will use the higher accuracy/FracBits.
    *
-   * @tparam TIn
    * @tparam FracBitsIn
    * @param In
    * @return Fixp
@@ -78,7 +77,6 @@ public:
    *        In case two fixed points with different accuracy are substracted,
    *        The resulting fixed point will use the higher accuracy/FracBits.
    *
-   * @tparam TIn
    * @tparam FracBitsIn
    * @param In
    * @return Fixp
@@ -95,7 +93,6 @@ public:
    * @brief Multiplication of two fixed points.
    *        The resulting fixed point will use the product of both FracBits.
    *
-   * @tparam TIn
    * @tparam FracBitsIn
    * @param In
    * @return Fixp<T, FracBits * FracBitsIn>
@@ -115,7 +112,6 @@ public:
    * @brief Division of two fixed points.
    *         Te resulting fixed point will use the division of both FracBits.
    *
-   * @tparam TIn
    * @tparam FracBitsIn
    * @param In
    * @return Fixp<T, (T)((FracBits / FracBitsIn))>
