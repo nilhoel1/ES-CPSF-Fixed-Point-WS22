@@ -7,10 +7,11 @@
 #include "../include/TypeChecker.h"
 
 // https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html
+
 /**
  * @brief Implementation of a fixed floating point data type.
  *
- * @tparam T used Type for representatione. Must be of: int[8,16,32,64]_t type.
+ * @tparam T Used Type for representation. Must be of: int[8,16,32,64]_t type.
  * @tparam FracBits Number of bits used to represent the part smaller 0.
  */
 template <class T, T FracBits> class Fixp {
@@ -36,7 +37,7 @@ public:
    * @return T
    */
   inline T getIntVal() {
-    return (Value >= 0) ? (Value >> FracBits) : (Value * -1) >> FracBits;
+    return (Value >= 0) ? (Value >> FracBits) : (-Value) >> FracBits;
   }
 
   /**
@@ -115,7 +116,7 @@ public:
 
   /**
    * @brief Division of two fixed points.
-  *         Te resulting fixed point will use the division of both FracBits.
+   *         Te resulting fixed point will use the division of both FracBits.
    *
    * @tparam TIn
    * @tparam FracBitsIn
@@ -131,7 +132,7 @@ public:
 
   /**
    * @brief Checking for Value equality.
-  *         Can only be used on fixed points of same dataType and accuracy.
+   *         Can only be used on fixed points of same dataType and accuracy.
    *
    * @param In
    * @return true
@@ -144,7 +145,7 @@ public:
 
   /**
    * @brief Checking for Value inequality.
-  *         Can only be used on fixed points of same dataType and accuracy.
+   *         Can only be used on fixed points of same dataType and accuracy.
    *
    * @param In
    * @return true
@@ -157,7 +158,7 @@ public:
 
   /**
    * @brief Printfunction for fixed points.
-  *         Some digits after the "." may be cut off during printing.
+   *         Some digits after the "." may be cut off during printing.
    *
    * @param Os
    * @param In
