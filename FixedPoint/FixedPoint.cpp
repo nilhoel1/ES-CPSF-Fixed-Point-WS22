@@ -65,9 +65,7 @@ public:
    * @param In
    * @return Fixp
    */
-  template <class TIn, TIn FracBitsIn>
-  Fixp operator+(Fixp<TIn, FracBitsIn> In) {
-    assert(sizeof(T) == sizeof(TIn));
+  template <T FracBitsIn> Fixp operator+(Fixp<T, FracBitsIn> In) {
     //=====================================
     //===== Your Code goes here ===========
     //=====================================
@@ -84,9 +82,7 @@ public:
    * @param In
    * @return Fixp
    */
-  template <class TIn, TIn FracBitsIn>
-  Fixp operator-(Fixp<TIn, FracBitsIn> In) {
-    assert(sizeof(T) == sizeof(TIn));
+  template <T FracBitsIn> Fixp operator-(Fixp<T, FracBitsIn> In) {
     //=====================================
     //===== Your Code goes here ===========
     //=====================================
@@ -102,9 +98,8 @@ public:
    * @param In
    * @return Fixp<T, FracBits * FracBitsIn>
    */
-  template <class TIn, TIn FracBitsIn>
-  Fixp<T, FracBits + FracBitsIn> operator*(Fixp<TIn, FracBitsIn> In) {
-    assert(sizeof(T) == sizeof(TIn));
+  template <T FracBitsIn>
+  Fixp<T, FracBits + FracBitsIn> operator*(Fixp<T, FracBitsIn> In) {
     // The wanted behaviour is that the result keeps its accuracy.
     // This means that the resulting Fixed Point type after the
     //    multiplication will use more frac bits.
@@ -123,9 +118,8 @@ public:
    * @param In
    * @return Fixp<T, (T)((FracBits / FracBitsIn))>
    */
-  template <class TIn, TIn FracBitsIn>
-  Fixp<T, (T)((FracBits - FracBitsIn))> operator/(Fixp<TIn, FracBitsIn> In) {
-    assert(sizeof(T) == sizeof(TIn));
+  template <T FracBitsIn>
+  Fixp<T, (T)((FracBits - FracBitsIn))> operator/(Fixp<T, FracBitsIn> In) {
     // No need to implement Division
     return Fixp<T, (T)((FracBits - FracBitsIn))>((T)Value / In.getValue());
   }
