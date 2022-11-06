@@ -2,7 +2,7 @@
 #include <ostream>
 #include <tgmath.h>
 
-#include "../include/TypeChecker.h"
+// #include "../include/TypeChecker.h"
 
 // https://inst.eecs.berkeley.edu/~cs61c/sp06/handout/fixedpt.html
 
@@ -131,7 +131,6 @@ public:
    * @return false
    */
   bool const operator==(Fixp In) {
-    assert(checkTypes(*this, In));
     return Value == In.getValue();
   }
 
@@ -144,7 +143,6 @@ public:
    * @return false
    */
   bool const operator!=(Fixp In) {
-    assert(checkTypes(*this, In));
     return this->Value != In.getValue();
   }
 
