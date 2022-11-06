@@ -7,7 +7,6 @@ project(ES+CPSF-Fixed-Point)
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL
   URL https://github.com/google/googletest/archive/refs/heads/main.zip
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
