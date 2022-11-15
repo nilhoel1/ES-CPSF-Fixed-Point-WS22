@@ -14,12 +14,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-#===============================================================================
-# 3. LLVM-TUTOR BUILD CONFIGURATION
-#===============================================================================
-# Use the same C++ standard as LLVM does
-set(CMAKE_CXX_STANDARD 14 CACHE STRING "")
-
 # Build type
 if (NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE Debug CACHE
