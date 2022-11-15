@@ -216,7 +216,7 @@ TEST(Negative, Multiplication) {
   Fixp<int8_t, 2> B(0b11111110); // -0.5
   Fixp<int8_t, 4> C(0b00000010); // 0.75
   auto AmB = A * B;
-  std::bitset<8> X(AmB.Value);
+  std::bitset<8> X(AmB.getValue());
   std::cout << "AmB: " << X << "\n";
   std::cout << "AmB: " << AmB << ", A: " << A << ", B: " << B << " ,C: " << C
             << "\n";

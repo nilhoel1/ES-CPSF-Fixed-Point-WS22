@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.13.4)
 project(ES+CPSF-Fixed-Point)
+set(CMAKE_CXX_STANDARD 20)
 
 #===============================================================================
 # 0. Add GoogleTest
@@ -7,18 +8,11 @@ project(ES+CPSF-Fixed-Point)
 include(FetchContent)
 FetchContent_Declare(
   googletest
-  URL
   URL https://github.com/google/googletest/archive/refs/heads/main.zip
 )
 # For Windows: Prevent overriding the parent project's compiler/linker settings
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
-
-#===============================================================================
-# 3. LLVM-TUTOR BUILD CONFIGURATION
-#===============================================================================
-# Use the same C++ standard as LLVM does
-set(CMAKE_CXX_STANDARD 14 CACHE STRING "")
 
 # Build type
 if (NOT CMAKE_BUILD_TYPE)
